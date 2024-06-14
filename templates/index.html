@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+    <h2>Portfolio</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in usrShares %}
+            {% if item.shares > 0 %}
+            <tr>
+                <td>{{item.ticker}}</td>
+                <td >{{item.shares}}</td>
+                <td>{{item.quote | usd}}</td>
+                <td>{{(item.quote * item.shares) | usd}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Cash: {{usrCash[0].cash | usd}}</p>
+    <p>TOTAL: {{(usrCash[0].cash + totalAmount) | usd}}</p>
+</div>
+
+{% endblock %}
